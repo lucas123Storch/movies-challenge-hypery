@@ -9,6 +9,7 @@
         <v-row align="center" justify="left">
           <v-col cols="1">
             <h2 class="display-1 purple--text text--darken-2">Trending</h2>
+            
           </v-col>
           <v-col cols="4" style="margin-left: 40px; padding-top: 30px">
             <v-select
@@ -55,29 +56,16 @@ export default Vue.extend({
       this.getMovies(e);
     },
     getMovies(time = "day") {
-      if (time == "day") {
-        axios
-          .get(
-            "https://api.themoviedb.org/3/trending/all/day?api_key=1ee7f176bd2d93ed7c3a9b2bc2d81d31"
-          )
-          .then((res) => {
-            this.moviesListData = res.data.results;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else if (time == "week") {
-        axios
-          .get(
-            "https://api.themoviedb.org/3/trending/all/week?api_key=1ee7f176bd2d93ed7c3a9b2bc2d81d31"
-          )
-          .then((res) => {
-            this.moviesListData = res.data.results;
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+      axios
+        .get(
+          `https://api.themoviedb.org/3/trending/all/${time}?api_key=1ee7f176bd2d93ed7c3a9b2bc2d81d31`
+        )
+        .then((res) => {
+          this.moviesListData = res.data.results;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 });
